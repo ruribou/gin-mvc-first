@@ -11,7 +11,7 @@ import (
 
 func ShowAllBlog(c *gin.Context) {
 	data := model.GetAll()
-	c.HTML(200, "index.html", gin.H{"datas": data})
+	c.HTML(200, "index.html", gin.H{"data": data})
 }
 
 func ShowOneBlog(c *gin.Context) {
