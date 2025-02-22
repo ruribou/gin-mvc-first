@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"time"
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -24,23 +23,8 @@ func init() {
 	var err error
 	db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
-		connect(mysql.Open(dsn), 100)
 		log.Fatalf("failed to initialize database: %v", err)
 	}
 	db.AutoMigrate(&Blog{})
 	fmt.Println("db connection succeeded")
-}
-
-func connect(dialector gorm.Dialector, count uint) {
-	var err error
-	if db, err = gorm.Open(dialector); err != nil {
-		if count > 1 {
-			time.Sleep(time.Second * 2)
-			count--
-			fmt.Printf("retry... count:%v\n", count)
-			connect(dialector, count)
-			return
-		}
-		panic(err.Error())
-	}
 }
