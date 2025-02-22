@@ -18,7 +18,7 @@ func GetAll() (data []Blog) {
 	return
 }
 
-func GetOne(id int) (data []Blog) {
+func GetOne(id int) (data Blog) {
 	result := Db.First(&data, id)
 	if result.Error != nil {
 		panic(result.Error)
