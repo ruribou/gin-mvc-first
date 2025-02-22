@@ -26,7 +26,7 @@ func ShowCreateBlog(c *gin.Context) {
 
 func CreateBlog(c *gin.Context) {
 	title := c.PostForm("title")
-	content := c.PostForm("Content")
+	content := c.PostForm("content")
 	data := model.Blog{Title: title, Content: content}
 	data.Create()
 	c.Redirect(302, "/")
