@@ -27,6 +27,7 @@ func init() {
 		connect(mysql.Open(dsn), 100)
 		log.Fatalf("failed to initialize database: %v", err)
 	}
+	Db.AutoMigrate(&Blog{})
 	fmt.Println("DB connection succeeded")
 }
 

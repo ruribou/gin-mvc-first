@@ -6,7 +6,7 @@
   </head>
   <body>
     <h1>INDEX</h1>
-    {{ range .datas }}
+    {{ range .data }}
     <p>
       {{ .ID }}: <a href="/show/{{.ID}}">{{.Title}}</a> /
       <a href="/edit/{{.ID}}">編集</a> / <a href="/delete/{{.ID}}">削除</a>

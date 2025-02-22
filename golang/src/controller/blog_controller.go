@@ -29,7 +29,7 @@ func CreateBlog(c *gin.Context) {
 	content := c.PostForm("Content")
 	data := model.Blog{Title: title, Content: content}
 	data.Create()
-	c.Redirect(301, "/")
+	c.Redirect(302, "/")
 }
 
 func ShowEditBlog(c *gin.Context) {
@@ -46,7 +46,7 @@ func EditBlog(c *gin.Context) {
 	content := c.PostForm("Content")
 	data.Content = content
 	data.Update()
-	c.Redirect(301, "/")
+	c.Redirect(302, "/")
 }
 
 func ShowCheckDeleteBlog(c *gin.Context) {
@@ -60,5 +60,5 @@ func DeleteBlog(c *gin.Context) {
 	fmt.Println("delete:", id)
 	data := model.GetOne(id)
 	data.Delete()
-	c.Redirect(301, "/")
+	c.Redirect(302, "/")
 }
