@@ -10,11 +10,12 @@ type BlogEntity struct {
 	Content string
 }
 
-func GetAll(data []BlogEntity) {
+func GetAll() (data []BlogEntity) {
 	result := Db.Find(&data)
 	if result.Error != nil {
 		panic(result.Error)
 	}
+	return
 }
 
 func GetOne(id int) (data []BlogEntity) {
