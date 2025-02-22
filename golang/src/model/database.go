@@ -2,6 +2,7 @@ package model
 
 import (
 	"fmt"
+	"log"
 	"os"
 	"time"
 
@@ -12,14 +13,19 @@ import (
 var Db *gorm.DB
 
 func init() {
-	user := os.Getenv("MYSQL_USER")
-	pw := os.Getenv("MYSQL_PASSWORD")
-	db_name := os.Getenv("MYSQL_DATABASE")
-	var path string = fmt.Sprintf("%s:%s@tcp(db:3306)/%s?charset=utf8&parseTime=true", user, pw, db_name)
-	dialector := mysql.Open(path)
+	dsn := fmt.Sprintf("%s:%s@tcp(%s:3306)/%s?charset=utf8mb4&parseTime=True&loc=Local",
+		os.Getenv("DB_USER"),
+		os.Getenv("DB_PASSWORD"),
+		os.Getenv("DB_HOST"),
+		os.Getenv("DB_NAME"),
+	)
+
+	log.Println("DSN:", dsn)
 	var err error
-	if Db, err = gorm.Open(dialector); err != nil {
-		connect(dialector, 100)
+	Db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	if err != nil {
+		connect(mysql.Open(dsn), 100)
+		log.Fatalf("failed to initialize database: %v", err)
 	}
 	fmt.Println("DB connection succeeded")
 }
