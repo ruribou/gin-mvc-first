@@ -43,7 +43,7 @@ func EditBlog(c *gin.Context) {
 	data := model.GetOne(id)
 	title := c.PostForm("title")
 	data.Title = title
-	content := c.PostForm("Content")
+	content := c.PostForm("content")
 	data.Content = content
 	data.Update()
 	c.Redirect(302, "/")

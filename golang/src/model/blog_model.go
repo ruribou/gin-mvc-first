@@ -11,7 +11,7 @@ type Blog struct {
 }
 
 func GetAll() (data []Blog) {
-	result := Db.Find(&data)
+	result := db.Find(&data)
 	if result.Error != nil {
 		panic(result.Error)
 	}
@@ -19,7 +19,7 @@ func GetAll() (data []Blog) {
 }
 
 func GetOne(id int) (data Blog) {
-	result := Db.First(&data, id)
+	result := db.First(&data, id)
 	if result.Error != nil {
 		panic(result.Error)
 	}
@@ -27,21 +27,21 @@ func GetOne(id int) (data Blog) {
 }
 
 func (b *Blog) Create(){
-	result := Db.Create(b)
+	result := db.Create(b)
 	if result.Error != nil {
 		panic(result.Error)
 	}
 }
 
 func (b *Blog) Update() {
-	result := Db.Save(b)
+	result := db.Save(b)
 	if result.Error != nil {
 		panic(result.Error)
 	}
 }
 
 func (b *Blog) Delete() {
-	result := Db.Delete(b)
+	result := db.Delete(b)
 	if result.Error != nil {
 		panic(result.Error)
 	}
